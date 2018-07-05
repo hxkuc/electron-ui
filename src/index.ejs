@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" class="htmlClass">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>美易通</title>
+    <% if (htmlWebpackPlugin.options.nodeModules) { %>
+      <!-- Add `node_modules/` to global paths so `require` works properly in development -->
+      <script>
+        require('module').globalPaths.push('<%= htmlWebpackPlugin.options.nodeModules.replace(/\\/g, '\\\\') %>')
+      </script>
+    <% } %>
+    <style>
+        .htmlClass{
+            font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+            padding:5px;
+            box-sizing:border-box;
+            height:100%;
+            width:100%;
+        }
+        .bodyClass{
+            height:100%;
+            width: 100%;
+            margin:0px;
+            padding:0px;
+            -webkit-user-select: none;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+        h1,h2,h3,h4,h5,h6,p{
+            margin: 0px;
+            padding: 0px;
+        }
+        ::-webkit-scrollbar{width:2px;height:8px;}
+        ::-webkit-scrollbar-track{background-color:#bee1eb;}
+        ::-webkit-scrollbar-thumb{background-color:#00aff0;}
+        ::-webkit-scrollbar-thumb:hover {background-color:#9c3}
+        ::-webkit-scrollbar-thumb:active {background-color:#00aff0}
+    </style>
+</head>
+
+<body class="bodyClass" ondragstart="return false" ondrop ="return false" ondragover="return false">
+    <div id="app"></div>
+<!-- Placed js at the end of the document so the pages load faster -->
+</body>
+
+<script type="text/javascript">
+if (process.env.NODE_ENV !== 'development') window.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+
+const electron = require('electron')
+const win = electron.remote.getCurrentWindow()
+
+win.on('maximize', function () {
+    let html = document.getElementsByTagName('html')[0]
+    html.style.padding = '0px'
+    win.setMovable(false)
+})
+
+win.on('unmaximize', function () {
+    let html = document.getElementsByTagName('html')[0]
+    html.style.padding = '5px'
+    win.setMovable(true)
+})
+</script>
+</html>
