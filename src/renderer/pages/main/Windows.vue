@@ -77,18 +77,18 @@
       async openNewWin () {
         this.$store.dispatch('changeTransition', 'none')
         let res = await this.$Win.openWin({
-          width: 600,
-          height: 400,
-          router: '/setting'
+          width: 450,
+          height: 350,
+          router: '/newWindow'
         })
         console.log(res)
       },
       async openSingleWin () {
         this.$store.dispatch('changeTransition', 'none')
         let res = await this.$Win.openWin({
-          width: 600,
-          height: 400,
-          router: '/setting',
+          width: 450,
+          height: 350,
+          router: '/newWindow',
           name: 'setting'
         })
         console.log(res)
@@ -96,9 +96,9 @@
       async openSingleWinReload () {
         this.$store.dispatch('changeTransition', 'none')
         let res = await this.$Win.openWin({
-          width: 600,
-          height: 400,
-          router: '/settingQuestion/index',
+          width: 450,
+          height: 350,
+          router: '/newWindow',
           name: 'setting',
           reload: true
         })
@@ -113,7 +113,7 @@
           height: 200,
           x: x,
           y: y,
-          router: '/answer',
+          router: '/newWindow',
           name: 'pop'
         })
         console.log(res)
@@ -127,7 +127,7 @@
           height: 200,
           x: x,
           y: y,
-          router: '/answer',
+          router: '/newWindow',
           name: 'popLeft',
           reload: true
         })
@@ -149,7 +149,7 @@
         let win = this.$Win.createWin({
           width: 200,
           height: 300,
-          router: '/answering',
+          router: '/newWindow',
           name: 'answering',
           x: x,
           y: y,
@@ -180,7 +180,7 @@
           height: 200,
           x: x,
           y: y,
-          router: '/answer',
+          router: '/newWindow',
           name: 'dropDown',
           reload: true
         })

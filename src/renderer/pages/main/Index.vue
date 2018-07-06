@@ -8,7 +8,7 @@
       <i class="iconfont icon-donghuaguanli icons"></i>
       <span style="font-size: 12px">动画效果</span>
     </div>
-    <div class="main-div-child" @click="goTransform">
+    <div class="main-div-child" @click="goIpc">
       <i class="iconfont icon-tongxin icons"></i>
       <span style="font-size: 12px">窗口通信</span>
     </div>
@@ -28,6 +28,10 @@
       goTransform () {
         this.$store.dispatch('changeTransition', 'slipLeft')
         this.$router.push('/transform')
+      },
+      goIpc () {
+        this.$store.dispatch('changeTransition', 'slipLeft')
+        this.$router.push('/ipc')
       }
     },
     mounted: function () {

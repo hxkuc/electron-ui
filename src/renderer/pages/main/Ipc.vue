@@ -1,205 +1,67 @@
 <template>
   <div class="main-div">
-    <div class="main-child">
-      <div class="main-div-child" @click="openNewWin">
+    <div class="main-child" style="justify-content: space-evenly">
+      <div class="main-div-child" @click="openNewWin1">
         <i class="iconfont icon-jiaojuan icons"></i>
-        <span style="font-size: 12px">新窗口(多开)</span>
+        <span style="font-size: 12px">打开name1</span>
       </div>
-      <div class="right-text">可以任意的重复打开多个窗口，窗口不复用</div>
+      <div class="main-div-child" @click="openNewWin2">
+        <i class="iconfont icon-jiaojuan icons"></i>
+        <span style="font-size: 12px">打开name2</span>
+      </div>
     </div>
 
     <div class="main-child">
       <div class="main-div-child" @click="openSingleWin">
-        <i class="iconfont icon-jiaojuan icons"></i>
-        <span style="font-size: 12px">新窗口(单开)</span>
+        <i class="iconfont icon-tongxin icons"></i>
+        <span style="font-size: 12px">发送数据</span>
       </div>
-      <div class="right-text">给窗口命名后，窗口即变为单开，重复打开会复用窗口</div>
+      <div class="right-text">发送数据到所有窗口</div>
     </div>
 
     <div class="main-child">
       <div class="main-div-child" @click="openSingleWinReload">
-        <i class="iconfont icon-jiaojuan icons"></i>
-        <span style="font-size: 12px">新窗口(重载)</span>
+        <i class="iconfont icon-tongxin icons"></i>
+        <span style="font-size: 12px">单独发送</span>
       </div>
-      <div class="right-text">如果有相同name的窗口已经打开，此操作会重载打开的窗口路由（相同路由不会重载）</div>
-    </div>
-
-    <div class="main-child">
-      <div class="main-div-child" @click="openSlip">
-        <i class="iconfont icon-jiaojuan icons"></i>
-        <span style="font-size: 12px">右下角弹出</span>
-      </div>
-      <div class="right-text">右下角弹出窗口可以作为信息提示</div>
-    </div>
-
-    <div class="main-child">
-      <div class="main-div-child" @click="openSlip">
-        <i class="iconfont icon-jiaojuan icons"></i>
-        <span style="font-size: 12px">右下角弹出</span>
-      </div>
-      <div class="right-text">右下角弹出窗口可以作为信息提示</div>
-    </div>
-
-    <div class="main-child">
-      <div class="main-div-child" @click="openRight">
-        <i class="iconfont icon-jiaojuan icons"></i>
-        <span style="font-size: 12px">右侧弹出</span>
-      </div>
-      <div class="right-text">右侧弹出</div>
-    </div>
-
-    <div class="main-child">
-      <div class="main-div-child" @click.stop="pinglun">
-        <i class="iconfont icon-jiaojuan icons"></i>
-        <span style="font-size: 12px">跟随主窗口</span>
-      </div>
-      <div class="right-text">跟随主窗口位置展现窗口，自动判断左边或者右边弹出</div>
-    </div>
-
-    <div class="main-child">
-      <div class="main-div-child" @click.stop="dropDown">
-        <i class="iconfont icon-jiaojuan icons"></i>
-        <span style="font-size: 12px">落地窗口</span>
-      </div>
-      <div class="right-text">窗口落地效果</div>
+      <div class="right-text">发送数据到name1窗口</div>
     </div>
 
   </div>
 </template>
 <script>
-  import TWEEN from '@tweenjs/tween.js'
   export default {
     data () {
       return {
       }
     },
     methods: {
-      async openNewWin () {
+      async openNewWin1 () {
         this.$store.dispatch('changeTransition', 'none')
-        let res = await this.$Win.openWin({
-          width: 600,
-          height: 400,
-          router: '/setting'
-        })
-        console.log(res)
-      },
-      async openSingleWin () {
-        this.$store.dispatch('changeTransition', 'none')
-        let res = await this.$Win.openWin({
-          width: 600,
-          height: 400,
-          router: '/setting',
-          name: 'setting'
-        })
-        console.log(res)
-      },
-      async openSingleWinReload () {
-        this.$store.dispatch('changeTransition', 'none')
-        let res = await this.$Win.openWin({
-          width: 600,
-          height: 400,
-          router: '/settingQuestion/index',
-          name: 'setting',
-          reload: true
-        })
-        console.log(res)
-      },
-      async openSlip () {
-        this.$store.dispatch('changeTransition', 'slipUp')
-        let x = window.screen.availWidth - 300 + 5
-        let y = window.screen.availHeight - 200 + 5
         let res = await this.$Win.openWin({
           width: 300,
-          height: 200,
-          x: x,
-          y: y,
-          router: '/answer',
-          name: 'pop'
+          height: 400,
+          router: '/ipcWindow',
+          name: 'name1'
         })
         console.log(res)
       },
-      async openRight () {
-        this.$store.dispatch('changeTransition', 'slipLeft')
-        let x = window.screen.availWidth - 300 + 5
-        let y = window.screen.availHeight - 200 + 5
+      async openNewWin2 () {
+        this.$store.dispatch('changeTransition', 'none')
         let res = await this.$Win.openWin({
           width: 300,
-          height: 200,
-          x: x,
-          y: y,
-          router: '/answer',
-          name: 'popLeft',
-          reload: true
+          height: 400,
+          router: '/ipcWindow',
+          name: 'name2'
         })
         console.log(res)
       },
-      pinglun (e) {
-        this.$store.dispatch('changeTransition', 'slipUp')
-        // 确定新窗口位置
-        // 老窗口位置
-        let fatherBounds = this.$Win.win.getBounds()
-        // 老窗口大小
-        // 新窗口宽度
-        let width = 200
-        // 判断右边是否过界
-        let leftWidth = window.screen.width - fatherBounds.width - fatherBounds.x - width
-        let x = leftWidth >= 0 ? fatherBounds.width + fatherBounds.x : fatherBounds.x - width
-        let y = fatherBounds.y
-
-        let win = this.$Win.createWin({
-          width: 200,
-          height: 300,
-          router: '/answering',
-          name: 'answering',
-          x: x,
-          y: y,
-          alwaysOnTop: true,
-          skipTaskbar: true
-        })
-        win.show()
-        let a = setTimeout(function () {
-          console.log(win)
-          win && win.close && win.close()
-        }, 5000)
-        win.on('close', function () {
-          clearTimeout(a)
-        })
+      openSingleWin () {
+        this.$Win.sendMsg('electron-ui, msg....')
       },
-      animate (time) {
-        requestAnimationFrame(this.animate)
-        TWEEN.update(time)
-      },
-      async dropDown () {
-        this.$store.dispatch('changeTransition', 'none')
-        let x = (window.screen.availWidth - 310) / 2
-        let y = -210
-        let afterY = window.screen.availHeight - 200
-
-        let win = this.$Win.createWin({
-          width: 300,
-          height: 200,
-          x: x,
-          y: y,
-          router: '/answer',
-          name: 'dropDown',
-          reload: true
-        })
-        win.show()
-        TWEEN.removeAll()
-        let a = win.getPosition()
-        let tween = new TWEEN.Tween({
-          x: a[0],
-          y: a[1]
-        })
-          .to({x: x, y: afterY}, 1100)
-          .onUpdate(function (a) {
-            win.setPosition(parseInt(a.x), parseInt(a.y))
-          }).start()
-        tween.easing(TWEEN.Easing.Bounce.Out)
-        this.animate()
+      openSingleWinReload () {
+        this.$Win.sendMsg('electron-ui, msg....', ['name1'])
       }
-    },
-    mounted: function () {
     }
   }
 </script>

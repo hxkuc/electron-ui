@@ -6,6 +6,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '*',
+      redirect: '/'
+    },
+    {
       path: '/',
       name: 'mainWindow',
       component: () => import('@/pages/MainWindow.vue'),
@@ -29,8 +33,14 @@ export default new Router({
       ]
     },
     {
-      path: '*',
-      redirect: '/'
+      path: '/ipcWindow',
+      name: 'ipcWindow',
+      component: () => import('@/pages/IpcWindow.vue')
+    },
+    {
+      path: '/newWindow',
+      name: 'newWindow',
+      component: () => import('@/pages/NewWindow.vue')
     },
     {
       path: '/backGround',
