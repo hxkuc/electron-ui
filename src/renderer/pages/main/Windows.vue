@@ -33,11 +33,11 @@
     </div>
 
     <div class="main-child">
-      <div class="main-div-child" @click="openSlip">
+      <div class="main-div-child" @mouseenter="openLeft" @mouseleave="closeLeft">
         <i class="iconfont icon-jiaojuan icons"></i>
-        <span style="font-size: 12px">右下角弹出</span>
+        <span style="font-size: 12px">鼠标悬停</span>
       </div>
-      <div class="right-text">右下角弹出窗口可以作为信息提示</div>
+      <div class="right-text">鼠标事件，自动触发</div>
     </div>
 
     <div class="main-child">
@@ -71,6 +71,7 @@
   export default {
     data () {
       return {
+        timeTap: null
       }
     },
     methods: {
@@ -98,7 +99,7 @@
         let res = await this.$Win.openWin({
           width: 450,
           height: 350,
-          router: '/newWindow',
+          router: '/setting',
           name: 'setting',
           reload: true
         })
@@ -197,6 +198,44 @@
           }).start()
         tween.easing(TWEEN.Easing.Bounce.Out)
         this.animate()
+      },
+      openLeft (e) {
+        clearTimeout(this.timeTap)
+        this.$store.dispatch('changeTransition', 'slipUp')
+        console.log(e)
+        // 确定新窗口位置
+        // 老窗口位置
+        let fatherBounds = this.$Win.win.getBounds()
+        // 老窗口大小
+        // 新窗口宽度
+        let width = 300
+        // 判断右边是否过界
+        let leftWidth = window.screen.width - fatherBounds.width - fatherBounds.x - width
+        let x = leftWidth >= 0 ? fatherBounds.width + fatherBounds.x : fatherBounds.x - width
+        let y = fatherBounds.y
+
+        let win = this.$Win.createWin({
+          width: 300,
+          height: 200,
+          router: '/newWindow',
+          name: 'leftname',
+          x: x,
+          y: y,
+          alwaysOnTop: true,
+          skipTaskbar: true,
+          reuse: true,
+          reload: true
+        })
+        win.show()
+        this.timeTap = setTimeout(function () {
+          console.log(win)
+          win && win.hide && win.hide()
+        }, 5000)
+      },
+      closeLeft () {
+        clearTimeout(this.timeTap)
+        let win = this.$Win.getWinByName('leftname')
+        win.hide()
       }
     },
     mounted: function () {

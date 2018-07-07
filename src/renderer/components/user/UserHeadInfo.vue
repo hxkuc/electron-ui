@@ -2,8 +2,8 @@
   <div class="userInfo" :style="{width: styleWidth}">
       <img @click="gotoHome" src="http://p1.qzone.la/upload/20150102/a3zs6l69.jpg" class="userImg">
       <div class="userRemarks">
-          <div class="userName">我爱你中国</div>
-          <div class="remark">艺术源于生活！</div>
+          <div class="userName">electron-ui</div>
+          <div class="remark">这是electron-ui的测试版本</div>
       </div>
   </div>
 </template>

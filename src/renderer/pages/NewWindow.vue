@@ -2,7 +2,7 @@
     <Frame>
       <renderHead slot="header"></renderHead>
       <div class="main-div">
-		<img src="~@/assets/electron.png" style="width: 200px; height: 200px">
+		<img src="~@/assets/electron.png" style="width: 30vw;">
 		<span class="ele-font">electron-ui</span>
       </div>
     </Frame>

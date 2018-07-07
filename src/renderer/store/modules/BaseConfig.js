@@ -1,10 +1,10 @@
 const state = {
   transition: 'default',
-  backGroundType: 1,
+  backGroundType: 2,
   backGroundBlur: 2,
   backGroundImg: '123.jpg',
-  backGroundColor: '#000',
-  fontColor: '#fff'
+  backGroundColor: '#fff',
+  fontColor: '#000'
 }
 
 const getters = {

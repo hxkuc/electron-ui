@@ -58,41 +58,12 @@ export default new Router({
       component: () => import('@/pages/Register')
     },
     {
-      path: '/answer',
-      name: 'answer',
-      component: () => import('@/pages/BeginAnswer')
-    },
-    {
-      path: '/answering',
-      name: 'answering',
-      component: () => import('@/pages/Answering')
-    },
-    {
-      path: '/finishAnswer',
-      name: 'finishAnswer',
-      component: () => import('@/pages/FinishAnswer')
-    },
-    {
       path: '/setting',
       name: 'setting',
       meta: {
         title: '设置'
       },
       component: () => import('@/pages/Setting')
-    },
-    {
-      path: '/settingQuestion',
-      name: 'settingQuestion',
-      meta: {
-        title: '出题'
-      },
-      component: () => import('@/pages/SettingQuestion'),
-      children: [
-        {
-          path: 'index',
-          component: () => import('@/pages/SettingQuestionIndex')
-        }
-      ]
     }
   ]
 })
