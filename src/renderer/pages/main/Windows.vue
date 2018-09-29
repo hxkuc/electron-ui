@@ -80,7 +80,9 @@
         let res = await this.$Win.openWin({
           width: 450,
           height: 350,
-          router: '/newWindow'
+          windowConfig: {
+            router: '/newWindow'
+          }
         })
         console.log(res)
       },
@@ -89,8 +91,10 @@
         let res = await this.$Win.openWin({
           width: 450,
           height: 350,
-          router: '/newWindow',
-          name: 'setting'
+          windowConfig: {
+            router: '/newWindow',
+            name: 'setting'
+          }
         })
         console.log(res)
       },
@@ -99,14 +103,16 @@
         let res = await this.$Win.openWin({
           width: 450,
           height: 350,
-          router: '/setting',
-          name: 'setting',
-          reload: true
+          windowConfig: {
+            router: '/setting',
+            name: 'setting',
+            reload: true
+          }
         })
         console.log(res)
       },
       async openSlip () {
-        this.$store.dispatch('changeTransition', 'slipUp')
+        // this.$store.dispatch('changeTransition', 'slipUp')
         let x = window.screen.availWidth - 300 + 5
         let y = window.screen.availHeight - 200 + 5
         let res = await this.$Win.openWin({
@@ -114,13 +120,16 @@
           height: 200,
           x: x,
           y: y,
-          router: '/newWindow',
-          name: 'pop'
+          windowConfig: {
+            router: '/newWindow',
+            name: 'pop',
+            animation: 'fromBottom'
+          }
         })
         console.log(res)
       },
       async openRight () {
-        this.$store.dispatch('changeTransition', 'slipLeft')
+        // this.$store.dispatch('changeTransition', 'slipLeft')
         let x = window.screen.availWidth - 300 + 5
         let y = window.screen.availHeight - 200 + 5
         let res = await this.$Win.openWin({
@@ -128,9 +137,12 @@
           height: 200,
           x: x,
           y: y,
-          router: '/newWindow',
-          name: 'popLeft',
-          reload: true
+          windowConfig: {
+            animation: 'fromRight',
+            router: '/newWindow',
+            name: 'popLeft',
+            reload: true
+          }
         })
         console.log(res)
       },
@@ -150,8 +162,11 @@
         let win = this.$Win.createWin({
           width: 200,
           height: 300,
-          router: '/newWindow',
-          name: 'answering',
+          windowConfig: {
+            router: '/newWindow',
+            name: 'answering',
+            animation: 'fromBottom'
+          },
           x: x,
           y: y,
           alwaysOnTop: true,
@@ -167,6 +182,7 @@
         })
       },
       animate (time) {
+        console.log(11)
         requestAnimationFrame(this.animate)
         TWEEN.update(time)
       },
@@ -180,24 +196,20 @@
           width: 300,
           height: 200,
           x: x,
-          y: y,
-          router: '/newWindow',
-          name: 'dropDown',
-          reload: true
+          y: afterY,
+          windowConfig: {
+            router: '/newWindow',
+            name: 'dropDown',
+            reload: true,
+            customAnimation: {
+              fromPosition: {
+                x: x,
+                y: y
+              }
+            }
+          }
         })
         win.show()
-        TWEEN.removeAll()
-        let a = win.getPosition()
-        let tween = new TWEEN.Tween({
-          x: a[0],
-          y: a[1]
-        })
-          .to({x: x, y: afterY}, 1100)
-          .onUpdate(function (a) {
-            win.setPosition(parseInt(a.x), parseInt(a.y))
-          }).start()
-        tween.easing(TWEEN.Easing.Bounce.Out)
-        this.animate()
       },
       openLeft (e) {
         clearTimeout(this.timeTap)
@@ -217,28 +229,33 @@
         let win = this.$Win.createWin({
           width: 300,
           height: 200,
-          router: '/newWindow',
-          name: 'leftname',
+          windowConfig: {
+            router: '/newWindow',
+            name: 'leftname',
+            reuse: true,
+            reload: true
+          },
           x: x,
           y: y,
           alwaysOnTop: true,
-          skipTaskbar: true,
-          reuse: true,
-          reload: true
+          skipTaskbar: true
         })
         win.show()
         this.timeTap = setTimeout(function () {
           console.log(win)
-          win && win.hide && win.hide()
+          this.$Win.exitWin({}, win.id)
+          // win && win.hide && win.hide()
         }, 5000)
       },
       closeLeft () {
         clearTimeout(this.timeTap)
         let win = this.$Win.getWinByName('leftname')
-        win.hide()
+        this.$Win.exitWin({}, win.id)
+        // win.hide()
       }
     },
     mounted: function () {
+      console.log(this.$Win.win)
     }
   }
 </script>
