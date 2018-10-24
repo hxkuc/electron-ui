@@ -67,7 +67,6 @@
   </div>
 </template>
 <script>
-  import TWEEN from '@tweenjs/tween.js'
   export default {
     data () {
       return {
@@ -123,7 +122,8 @@
           windowConfig: {
             router: '/newWindow',
             name: 'pop',
-            animation: 'fromBottom'
+            animation: 'fromBottom',
+            vibrancy: false
           }
         })
         console.log(res)
@@ -180,11 +180,6 @@
         win.on('close', function () {
           clearTimeout(a)
         })
-      },
-      animate (time) {
-        console.log(11)
-        requestAnimationFrame(this.animate)
-        TWEEN.update(time)
       },
       async dropDown () {
         this.$store.dispatch('changeTransition', 'none')
@@ -243,14 +238,14 @@
         win.show()
         this.timeTap = setTimeout(function () {
           console.log(win)
-          this.$Win.exitWin({}, win.id)
+          this.$Win.exitWin({}, win)
           // win && win.hide && win.hide()
         }, 5000)
       },
       closeLeft () {
         clearTimeout(this.timeTap)
         let win = this.$Win.getWinByName('leftname')
-        this.$Win.exitWin({}, win.id)
+        this.$Win.exitWin({}, win)
         // win.hide()
       }
     },

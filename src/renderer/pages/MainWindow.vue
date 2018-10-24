@@ -10,7 +10,7 @@ import mainHead from '@/components/header/mainHead.vue'
 import mainFooter from '@/components/footer/MainFooter.vue'
 export default {
   name: 'MainWindow',
-  components: {Frame, mainHead, mainFooter}
+  components: { Frame, mainHead, mainFooter }
 }
 </script>
 <style>

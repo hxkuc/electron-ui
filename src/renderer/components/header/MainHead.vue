@@ -44,7 +44,7 @@ export default {
       this.$router.push('/login')
     }
   },
-  components: {userHeadInfo}
+  components: { userHeadInfo }
 }
 </script>
 

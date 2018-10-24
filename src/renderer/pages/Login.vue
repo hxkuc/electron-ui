@@ -69,7 +69,7 @@ export default {
       this.$router.push('/register')
     }
   },
-  components: {Frame, mainHead}
+  components: { Frame, mainHead }
 }
 </script>
 <style scoped>

@@ -24,7 +24,7 @@
 <script>
   import Frame from '@/components/frame/mainFrame.vue'
   import renderHead from '@/components/header/renderHead.vue'
-  import {remote} from 'electron'
+  import { remote } from 'electron'
   import fs from 'fs'
   export default {
     name: 'Setting',

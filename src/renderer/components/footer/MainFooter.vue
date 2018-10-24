@@ -14,10 +14,12 @@ export default {
       this.$Win.openWin({
         width: 760,
         height: 550,
-        router: '/setting',
-        name: 'setting',
-        maximizable: false,
-        resizable: false
+        windowConfig: {
+          router: '/setting',
+          name: 'setting',
+          maximizable: false,
+          resizable: false
+        }
       })
     },
     goBack () {

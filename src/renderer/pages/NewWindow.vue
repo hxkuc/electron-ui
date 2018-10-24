@@ -11,7 +11,7 @@
 import Frame from '@/components/frame/mainFrame.vue'
 import renderHead from '@/components/header/renderHead.vue'
 export default {
-  components: {Frame, renderHead}
+  components: { Frame, renderHead }
 }
 </script>
 <style scoped>

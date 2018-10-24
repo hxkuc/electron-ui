@@ -41,8 +41,10 @@
         let res = await this.$Win.openWin({
           width: 300,
           height: 400,
-          router: '/ipcWindow',
-          name: 'name1'
+          windowConfig: {
+            router: '/ipcWindow',
+            name: 'name1'
+          }
         })
         console.log(res)
       },
@@ -51,8 +53,10 @@
         let res = await this.$Win.openWin({
           width: 300,
           height: 400,
-          router: '/ipcWindow',
-          name: 'name2'
+          windowConfig: {
+            router: '/ipcWindow',
+            name: 'name2'
+          }
         })
         console.log(res)
       },

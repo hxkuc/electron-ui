@@ -70,7 +70,7 @@ export default {
       this.$router.push('/login')
     }
   },
-  components: {Frame, mainHead}
+  components: { Frame, mainHead }
 }
 </script>
 <style>
