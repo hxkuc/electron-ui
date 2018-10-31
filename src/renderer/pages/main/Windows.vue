@@ -75,7 +75,7 @@
     },
     methods: {
       async openNewWin () {
-        this.$store.dispatch('changeTransition', 'none')
+        this.$store.dispatch('changeTransition', 'default')
         let res = await this.$Win.openWin({
           width: 450,
           height: 350,
@@ -86,32 +86,34 @@
         console.log(res)
       },
       async openSingleWin () {
-        this.$store.dispatch('changeTransition', 'none')
+        this.$store.dispatch('changeTransition', 'default')
         let res = await this.$Win.openWin({
           width: 450,
           height: 350,
           windowConfig: {
             router: '/newWindow',
-            name: 'setting'
+            name: 'setting',
+            vibrancy: true
           }
         })
         console.log(res)
       },
       async openSingleWinReload () {
-        this.$store.dispatch('changeTransition', 'none')
+        this.$store.dispatch('changeTransition', 'default')
         let res = await this.$Win.openWin({
           width: 450,
           height: 350,
           windowConfig: {
             router: '/setting',
             name: 'setting',
-            reload: true
+            reload: true,
+            vibrancy: true
           }
         })
         console.log(res)
       },
       async openSlip () {
-        // this.$store.dispatch('changeTransition', 'slipUp')
+        this.$store.dispatch('changeTransition', 'default')
         let x = window.screen.availWidth - 300 + 5
         let y = window.screen.availHeight - 200 + 5
         let res = await this.$Win.openWin({
@@ -123,13 +125,13 @@
             router: '/newWindow',
             name: 'pop',
             animation: 'fromBottom',
-            vibrancy: false
+            vibrancy: true
           }
         })
         console.log(res)
       },
       async openRight () {
-        // this.$store.dispatch('changeTransition', 'slipLeft')
+        this.$store.dispatch('changeTransition', 'default')
         let x = window.screen.availWidth - 300 + 5
         let y = window.screen.availHeight - 200 + 5
         let res = await this.$Win.openWin({
@@ -141,13 +143,14 @@
             animation: 'fromRight',
             router: '/newWindow',
             name: 'popLeft',
-            reload: true
+            reload: true,
+            vibrancy: true
           }
         })
         console.log(res)
       },
       pinglun (e) {
-        this.$store.dispatch('changeTransition', 'slipUp')
+        this.$store.dispatch('changeTransition', 'default')
         // 确定新窗口位置
         // 老窗口位置
         let fatherBounds = this.$Win.win.getBounds()
@@ -165,7 +168,8 @@
           windowConfig: {
             router: '/newWindow',
             name: 'answering',
-            animation: 'fromBottom'
+            animation: 'fromBottom',
+            vibrancy: true
           },
           x: x,
           y: y,
@@ -182,7 +186,7 @@
         })
       },
       async dropDown () {
-        this.$store.dispatch('changeTransition', 'none')
+        this.$store.dispatch('changeTransition', 'default')
         let x = (window.screen.availWidth - 310) / 2
         let y = -210
         let afterY = window.screen.availHeight - 200
@@ -196,6 +200,7 @@
             router: '/newWindow',
             name: 'dropDown',
             reload: true,
+            vibrancy: true,
             customAnimation: {
               fromPosition: {
                 x: x,
@@ -208,7 +213,7 @@
       },
       openLeft (e) {
         clearTimeout(this.timeTap)
-        this.$store.dispatch('changeTransition', 'slipUp')
+        this.$store.dispatch('changeTransition', 'default')
         console.log(e)
         // 确定新窗口位置
         // 老窗口位置
@@ -228,7 +233,8 @@
             router: '/newWindow',
             name: 'leftname',
             reuse: true,
-            reload: true
+            reload: true,
+            vibrancy: true
           },
           x: x,
           y: y,

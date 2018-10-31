@@ -14,9 +14,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 引入动画样式css
 import './assets/transform/transform.css'
 
-Win.init({
+Win.init(router, {
   freeWindowNum: 2,
-  domain: 'http://localhost:9088/'
+  port: 9088
 })
 Vue.prototype.$Win = Win
 Vue.use(ElementUI)
