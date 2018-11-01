@@ -63,6 +63,10 @@
           if (filePaths && filePaths[0]) {
             // 重命名文件
             let fileName = new Date().getTime() + filePaths[0].substring(filePaths[0].lastIndexOf('.'))
+            // 判断有没有文件夹
+            if (!fs.existsSync(__static + '/background')) {
+              fs.mkdirSync(__static + '/background')
+            }
             let writeStream = fs.createWriteStream(__static + '/background/' + fileName)
             writeStream.on('finish', () => {
               this.selectImg(fileName)
