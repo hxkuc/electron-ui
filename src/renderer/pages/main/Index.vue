@@ -12,6 +12,10 @@
       <i class="iconfont icon-tongxin icons"></i>
       <span style="font-size: 12px">窗口通信</span>
     </div>
+    <div class="main-div-child" @click="goQQ">
+      <i class="iconfont icon-tongxin icons"></i>
+      <span style="font-size: 12px">仿qq首页</span>
+    </div>
   </div>
 </template>
 <script>
@@ -32,6 +36,18 @@
       goIpc () {
         this.$store.dispatch('changeTransition', 'slipLeft')
         this.$router.push('/ipc')
+      },
+      goQQ () {
+        this.$store.dispatch('changeTransition', 'default')
+        let win = this.$Win.createWin({
+          width: 295,
+          height: 530,
+          windowConfig: {
+            router: '/qqPage',
+            vibrancy: true
+          }
+        })
+        win.show()
       }
     },
     mounted: function () {

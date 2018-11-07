@@ -23,7 +23,6 @@
               <div style="display: flex;justify-content: center;margin-top: 10px;">
                 <i class="iconfont icon-btn_qq" style="font-size: 20px;margin: 0 5px;"></i>
                 <i class="iconfont icon-btn_wechat" style="font-size: 20px;margin: 0 5px;"></i>
-
               </div>
             </div>
         </div>

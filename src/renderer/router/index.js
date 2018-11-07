@@ -38,6 +38,11 @@ export default new Router({
       component: () => import('@/pages/IpcWindow.vue')
     },
     {
+      path: '/infoWindow',
+      name: 'infoWindow',
+      component: () => import('@/pages/InfoWindow.vue')
+    },
+    {
       path: '/newWindow',
       name: 'newWindow',
       component: () => import('@/pages/NewWindow.vue')
@@ -64,6 +69,11 @@ export default new Router({
         title: '设置'
       },
       component: () => import('@/pages/Setting')
+    },
+    {
+      path: '/qqPage',
+      name: 'qqPage',
+      component: () => import('@/pages/QQpage')
     }
   ]
 })
