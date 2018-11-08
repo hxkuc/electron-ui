@@ -3,7 +3,7 @@
     <QQhead slot="header"></QQhead>
     <div class="bodydiv">
         <div class="firstDiv">
-          <img  @mouseover="openLeft" @mouseleave="closeLeft" src="http://p1.qzone.la/upload/20150102/a3zs6l69.jpg" class="userImg"></img>
+          <img  @mouseover="openLeft($event, 0)" @mouseleave="closeLeft" src="http://p1.qzone.la/upload/20150102/a3zs6l69.jpg" class="userImg"></img>
           <div style="display:flex;flex-direction:column;margin-left:10px;width:100%">
             <span style="font-size:18px">我的qq</span>
             <span style="font-size:12px">只是测试一下</span>
@@ -21,8 +21,8 @@
           <span>动态</span>
         </div>
         <div class="listdiv">
-          <div class="itemdiv" v-for="item in list">
-            <img @mouseover="openLeft" src="http://p1.qzone.la/upload/20150102/a3zs6l69.jpg" class="itemImg"></img>
+          <div class="itemdiv" v-for="(item, index) in list">
+            <img @mouseover="openLeft($event, index + 1)" src="http://p1.qzone.la/upload/20150102/a3zs6l69.jpg" class="itemImg"></img>
             <div style="display: flex;flex-direction:column;margin-left:10px">
               <span style="font-size:16px;font-weight:600">electron交流</span>
               <span style="font-size:12px">张三：发表信息</span>
@@ -46,7 +46,7 @@ export default {
     }
   },
   methods: {
-    openLeft (e) {
+    openLeft (e, index) {
       // 查找有无窗口存在
       let width = 300
       // 判断右边是否过界
@@ -57,7 +57,11 @@ export default {
       let y = e.screenY - e.offsetY
       let win = this.$Win.getWinByName('leftname')
       if (win) {
-        this.$Win.routerPush('/setting', win)
+        this.$Win.routerPush({
+          router: '/infoWindow/' + index,
+          win: win,
+          data: {name: 666}
+        })
         win.show()
         this.$Win.animation({
           win: win,
@@ -80,7 +84,7 @@ export default {
           width: 300,
           height: 200,
           windowConfig: {
-            router: '/infoWindow',
+            router: '/infoWindow/' + index,
             name: 'leftname',
             customAnimation: {
               fromPosition: {x: x, y: y - 50},

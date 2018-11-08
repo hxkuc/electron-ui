@@ -3,7 +3,7 @@
       <renderHead slot="header"></renderHead>
       <div class="main-div">
 		<img src="~@/assets/electron.png" style="width: 30vw;">
-		<span class="ele-font">electron-ui</span>
+		<span class="ele-font">electron-ui-{{data.name}}</span>
       </div>
     </Frame>
 </template>
@@ -11,7 +11,15 @@
 import Frame from '@/components/frame/mainFrame.vue'
 import renderHead from '@/components/header/renderHead.vue'
 export default {
-  components: { Frame, renderHead }
+  data () {
+    return {
+      data: {}
+    }
+  },
+  components: { Frame, renderHead },
+  mounted: function () {
+    this.data = this.$Win.getParameter()
+  }
 }
 </script>
 <style scoped>

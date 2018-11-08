@@ -38,7 +38,7 @@ export default new Router({
       component: () => import('@/pages/IpcWindow.vue')
     },
     {
-      path: '/infoWindow',
+      path: '/infoWindow/:id',
       name: 'infoWindow',
       component: () => import('@/pages/InfoWindow.vue')
     },
