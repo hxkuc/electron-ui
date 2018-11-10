@@ -3,13 +3,13 @@
     <QQhead slot="header"></QQhead>
     <div class="bodydiv">
         <div class="firstDiv">
-          <img  @mouseover="openLeft($event, 0)" @mouseleave="closeLeft" src="http://p1.qzone.la/upload/20150102/a3zs6l69.jpg" class="userImg"></img>
+          <img  @mouseenter="openLeft($event, 0)" @mouseleave="closeLeft" src="http://p1.qzone.la/upload/20150102/a3zs6l69.jpg" class="userImg"></img>
           <div style="display:flex;flex-direction:column;margin-left:10px;width:100%">
             <span style="font-size:18px">我的qq</span>
             <span style="font-size:12px">只是测试一下</span>
           </div>
           <div style="padding-right:8px">
-            <i class="rightIcon iconfont icon-yuncloud259"></i>
+            <i class="rightIcon iconfont icon-yuncloud259" @mouseenter="showwindow"></i>
           </div>
         </div>
         <div class="seconddiv">
@@ -22,7 +22,7 @@
         </div>
         <div class="listdiv">
           <div class="itemdiv" v-for="(item, index) in list">
-            <img @mouseover="openLeft($event, index + 1)" src="http://p1.qzone.la/upload/20150102/a3zs6l69.jpg" class="itemImg"></img>
+            <img @mouseenter="openLeft($event, index + 1)"  @mouseleave="closeLeft" src="http://p1.qzone.la/upload/20150102/a3zs6l69.jpg" class="itemImg"></img>
             <div style="display: flex;flex-direction:column;margin-left:10px">
               <span style="font-size:16px;font-weight:600">electron交流</span>
               <span style="font-size:12px">张三：发表信息</span>
@@ -42,25 +42,26 @@ export default {
   name: 'qq',
   data () {
     return {
-      list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      timeTap: ''
     }
   },
   methods: {
     openLeft (e, index) {
       // 查找有无窗口存在
+      clearTimeout(this.timeTap)
       let width = 300
+      let fatherBounds = this.$Win.win.getBounds()
       // 判断右边是否过界
-      /* let leftWidth = window.screen.width - fatherBounds.width - fatherBounds.x - width
-      let x = leftWidth >= 0 ? fatherBounds.width + fatherBounds.x : fatherBounds.x - width
-      let y = fatherBounds.y */
-      let x = e.screenX - e.offsetX - width - 15
+      let leftWidth = e.screenX - e.offsetX - width - 15
+      let x = leftWidth < 0 ? leftWidth + width + fatherBounds.width : leftWidth
       let y = e.screenY - e.offsetY
       let win = this.$Win.getWinByName('leftname')
       if (win) {
         this.$Win.routerPush({
           router: '/infoWindow/' + index,
           win: win,
-          data: {name: 666}
+          data: {name: index}
         })
         win.show()
         this.$Win.animation({
@@ -72,14 +73,7 @@ export default {
           }
         })
       } else {
-        clearTimeout(this.timeTap)
         this.$store.dispatch('changeTransition', 'default')
-        // 确定新窗口位置
-        // 老窗口位置
-        // let fatherBounds = this.$Win.win.getBounds()
-        // 老窗口大小
-        // 新窗口宽度
-
         win = this.$Win.createWin({
           width: 300,
           height: 200,
@@ -90,6 +84,7 @@ export default {
               fromPosition: {x: x, y: y - 50},
               time: 300 // 动画时间
             },
+            data: {name: index},
             reuse: true,
             reload: true,
             vibrancy: true
@@ -101,16 +96,34 @@ export default {
         })
         win.show()
       }
-      /* this.timeTap = setTimeout(function () {
-        console.log(win)
-        this.$Win.exitWin({}, win)
-      }, 15000) */
     },
     closeLeft () {
-      // clearTimeout(this.timeTap)
-      // let win = this.$Win.getWinByName('leftname')
-      // this.$Win.exitWin({}, win)
-      // win.hide()
+      clearTimeout(this.timeTap)
+      let win = this.$Win.getWinByName('leftname')
+      this.timeTap = setTimeout(() => {
+        this.$Win.closeWin({}, win)
+      }, 1000)
+    },
+    showwindow () {
+      let fatherBounds = this.$Win.win.getBounds()
+      // 判断右边是否过界
+      let leftWidth = window.screen.width - fatherBounds.width - fatherBounds.x - 300
+      let x = leftWidth >= 0 ? fatherBounds.width + fatherBounds.x : fatherBounds.x - 300
+      let y = fatherBounds.y
+
+      let win = this.$Win.createWin({
+        width: 300,
+        height: 200,
+        x: x,
+        y: y,
+        windowConfig: {
+          router: '/cloudWindow',
+          vibrancy: false,
+          name: 'cloud',
+          animation: 'fromBottom'
+        }
+      })
+      win.show()
     }
   },
   components: { Frame, QQhead, QQFooter }

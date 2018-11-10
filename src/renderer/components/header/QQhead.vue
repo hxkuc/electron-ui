@@ -2,7 +2,7 @@
     <div class="header">
         <span style="margin-left: 5px;font-size: 13px">{{title}}</span>
         <div class="rightBox">
-            <i @click="fullWindow" class="topicon rightIcon iconfont icon-pifu"></i>
+            <i @click="setting" class="topicon rightIcon iconfont icon-pifu"></i>
             <i @click="fullWindow" class="topicon rightIcon iconfont icon-untitled44"></i>
             <i @click="hideWindow" class="topicon rightIcon iconfont icon-jianhao"></i>
             <i @click="closeWindow" class="topicon rightIconLast rightIcon iconfont icon-error"></i>
@@ -37,6 +37,19 @@ export default {
       } else {
         win.minimize()
       }
+    },
+    setting () {
+      this.$store.dispatch('changeTransition', 'default')
+      this.$Win.openWin({
+        width: 760,
+        height: 550,
+        windowConfig: {
+          router: '/setting',
+          name: 'setting',
+          maximizable: false,
+          resizable: false
+        }
+      })
     }
   },
   computed: {

@@ -17,6 +17,9 @@ export default {
     }
   },
   components: { Frame, InfoHead },
+  mounted: function () {
+    this.data = this.$Win.getParameter()
+  },
   beforeRouteUpdate (to, from, next) {
     // 在当前路由改变，但是该组件被复用时调用
     // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
@@ -26,6 +29,7 @@ export default {
     console.log(this.$Win)
     console.log(this.$Win.getParameter())
     console.log(this.$route.query)
+    this.data = this.$Win.getParameter()
   }
 }
 </script>

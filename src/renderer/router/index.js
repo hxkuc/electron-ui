@@ -74,6 +74,11 @@ export default new Router({
       path: '/qqPage',
       name: 'qqPage',
       component: () => import('@/pages/QQpage')
+    },
+    {
+      path: '/cloudWindow',
+      name: 'cloudWindow',
+      component: () => import('@/pages/CloudWindow')
     }
   ]
 })
