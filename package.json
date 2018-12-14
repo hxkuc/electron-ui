@@ -19,7 +19,8 @@
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
     "test": "npm run unit && npm run e2e",
     "unit": "karma start test/unit/karma.conf.js",
-    "postinstall": "npm run lint:fix"
+    "rebuild": "electron-rebuild",
+    "postinstall": "npm run lint:fix && npm run rebuild"
   },
   "build": {
     "productName": "electron-ui",
@@ -92,6 +93,7 @@
     "electron-debug": "^2.0.0",
     "electron-devtools-installer": "^2.2.4",
     "electron-builder": "^20.19.2",
+    "electron-rebuild": "^1.8.2",
     "babel-eslint": "^8.2.5",
     "eslint": "^5.0.1",
     "eslint-friendly-formatter": "^4.0.1",
